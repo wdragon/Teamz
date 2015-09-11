@@ -1,0 +1,27 @@
+{
+  "name": "Teamz",
+  "main": "js/app.js",
+  "dependencies": {
+    "react": "^0.13.0",
+    "parse": "^1.4.0",
+    "parse-react": "^0.2.0",
+    "bootstrap": "^3.3.3",
+    "react-bootstrap": "^0.23.0",
+    "react-mini-router": "^1.1.6",
+    "urllite": "^0.5.0",
+    "crypto-js": "^3.1.5"
+  },
+  "devDependencies": {
+    "browserify": "^6.2.0",
+    "reactify": "^0.15.2",
+    "watchify": "^2.1.1"
+  },
+  "scripts": {
+    "start": "watchify -o js/bin/bundle.js -v -d js/app.js"
+  },
+  "browserify": {
+    "transform": [
+      "reactify"
+    ]
+  }
+}
