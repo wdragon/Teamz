@@ -1,2 +1,2 @@
 # Teamz
-Your and your teams, together
+You and your teams, together
