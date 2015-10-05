@@ -6,7 +6,6 @@ var PageHeader = require('react-bootstrap/lib/PageHeader');
 var ButtonToolbar = require('react-bootstrap/lib/ButtonToolbar');
 var ButtonGroup = require('react-bootstrap/lib/ButtonGroup');
 var Button = require('react-bootstrap/lib/Button');
-var ModalTrigger = require('react-bootstrap/lib/ModalTrigger');
 var Nav = require('react-bootstrap/lib/Nav');
 var NavItem = require('react-bootstrap/lib/NavItem');
 
@@ -23,7 +22,7 @@ var GroupHome = React.createClass({
   observe: function(props, state) {
     return { 
       'groups': new Parse.Query('Group').equalTo('objectId', props.groupId),
-      'joined': Parse.User.current().relation('subscriptions').query().equalTo('objectId', props.groupId)
+      'isMember': Parse.User.current().relation('subscriptions').query().equalTo('objectId', props.groupId)
     }
   },
 
@@ -57,11 +56,11 @@ var GroupHome = React.createClass({
     if (this.pendingQueries().indexOf('groups') != -1) {
       return (<div className='groupHeader' />);
     } else {      
-      var actions = (this.pendingQueries().indexOf('joined')== -1)?
+      var actions = (this.pendingQueries().indexOf('isMember')== -1)?
         (
           <div className="pull-right">
             <ButtonToolbar>
-              {this.data.joined.length == 0 ?
+              {this.data.isMember.length == 0 ?
                 <Button>Join</Button> :
                 (<ButtonGroup>
                    <Button>Notifications</Button>

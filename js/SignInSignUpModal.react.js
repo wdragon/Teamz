@@ -24,16 +24,19 @@ var SignInSignUpModal = React.createClass({
   },
 
   render: function() {
-    if (this.data.user) {
+    if (this.data.user || !this.props.show) {
       return <span />;
     } else {
       return (
-        <Modal 
-          title='Sign In or Sign Up' 
+        <Modal
+          show={this.props.show} 
           animation={true}
-          onRequestHide={function() {}}
+          onHide={this.props.onHide}
           >
-          <div className='modal-body'>
+          <Modal.Header closeButton>
+            <Modal.Title>Login or Sign Up</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
             <form className='form-horizontal'>
               {
                 this.state.error ?
@@ -58,7 +61,7 @@ var SignInSignUpModal = React.createClass({
                 <Button onClick={this._onSignUp}>Sign Up</Button>
               </ButtonToolbar>
             </form>
-          </div>
+          </Modal.Body>
         </Modal>
       );
     }  

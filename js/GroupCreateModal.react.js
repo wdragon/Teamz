@@ -2,7 +2,7 @@ var React = require('react');
 var Parse = require('parse').Parse;
 var ParseReact = require('parse-react');
 
-var Id = require('parse-react/lib/Id');
+var Id = require('parse-react/lib/react-native/Id');
 var Button = require('react-bootstrap/lib/Button');
 var Input = require('react-bootstrap/lib/Input');
 var Modal = require('react-bootstrap/lib/Modal');
@@ -13,23 +13,25 @@ var TeamzUtils = require('./TeamzUtils.js');
 var GroupCreateModal = React.createClass({
   getInitialState: function() {
     return ({
-      show: true,
       name: '',
       privacy: TeamzUtils.OPEN_GROUP
     });
   },
 
   render: function() {
-    if (!this.state.show) {
+    if (!this.props.show) {
       return <span />;
     } else {
       return (
-        <Modal 
-          title='Create a group' 
+        <Modal
+          show={this.props.show} 
           animation={true}
-          onRequestHide={function() {}}
+          onHide={this.props.onHide}
           >
-          <div className='modal-body'>
+          <Modal.Header closeButton>
+            <Modal.Title>Create a group</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
             <form className='form-horizontal'>
               <Input 
                 type='text' 
@@ -46,11 +48,11 @@ var GroupCreateModal = React.createClass({
                 help='The public can find and join the group' 
                 onChange={this._onOpenGroupChange} />
             </form>
-          </div>
-          <div className='modal-footer'>
-            <Button onClick={this.props.onRequestHide}>Cancel</Button>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button onClick={this.props.onHide}>Cancel</Button>
             <Button onClick={this._onCreateGroup} bsStyle='primary'>Create group</Button>
-          </div>
+          </Modal.Footer>
         </Modal>
       );
     }
